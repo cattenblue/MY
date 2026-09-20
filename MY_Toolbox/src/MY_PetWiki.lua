@@ -154,9 +154,9 @@ function D.HookPetFrame(frame)
 	local hPreferList = frame:Lookup('PageSet_All/Page_MyPet/WndScroll_Pets/WndContainer_Pets/Wnd_Prefer', '')
 	if hPreferList then
 		local function OnPetItemLButtonClick()
-			if O.bEnable and this:GetParent().tPet and not IsCtrlKeyDown() and not IsAltKeyDown() and this:IsObjectSelected() then
-				D.Open(this:GetParent().tPet.dwPetIndex)
-				return
+			local hPetMod = this:GetParent()
+			if O.bEnable and hPetMod.tPet and not IsCtrlKeyDown() and not IsAltKeyDown() and hPetMod.bSel then
+				D.Open(hPetMod.tPet.dwPetIndex)
 			end
 			return X.UI.FormatUIEventMask(false, true)
 		end
@@ -175,9 +175,9 @@ function D.HookPetFrame(frame)
 	local hPets = frame:Lookup('PageSet_All/Page_MyPet/WndScroll_Pets/WndContainer_Pets/Wnd_Pets', '')
 	if hPets then
 		local function OnPetItemLButtonClick()
-			if O.bEnable and this.tPet and not IsCtrlKeyDown() and not IsAltKeyDown() and this:IsObjectSelected() then
+			local hPetMod = this:GetParent()
+			if O.bEnable and this.tPet and not IsCtrlKeyDown() and not IsAltKeyDown() and hPetMod.bSel then
 				D.Open(this.tPet.dwPetIndex)
-				return
 			end
 			return X.UI.FormatUIEventMask(false, true)
 		end
