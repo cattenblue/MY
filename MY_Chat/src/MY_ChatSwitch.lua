@@ -155,6 +155,9 @@ local function UpdateChannelDailyLimit(hRadio, bPlus)
 			if nDailyLimit > 0 then
 				dwPercent = (nDailyLimit - nDailyCount) / nDailyLimit
 				hRadio.szTip = GetFormatText(_L('Today: %d\nDaily limit: %d', nDailyCount, nDailyLimit), nil, 255, 255, 0)
+			elseif nDailyLimit == 0 then
+				dwPercent = 0
+				hRadio.szTip = GetFormatText(_L('Today: %d\nDaily limit: %d', nDailyCount, nDailyLimit), nil, 255, 255, 0)
 			else
 				hRadio.szTip = GetFormatText(_L('Today: %d\nDaily limit: no limitation', nDailyCount), nil, 255, 255, 0)
 			end
