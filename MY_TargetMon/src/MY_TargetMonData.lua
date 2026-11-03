@@ -15,7 +15,7 @@ local PLUGIN_ROOT = X.PACKET_INFO.ROOT .. PLUGIN_NAME
 local MODULE_NAME = 'MY_TargetMon'
 local _L = X.LoadLangPack(PLUGIN_ROOT .. '/lang/')
 --------------------------------------------------------------------------
-if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.15') then
+if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.19') then
 	return
 end
 --[[#DEBUG BEGIN]]X.ReportModuleLoading(MODULE_PATH, 'START')--[[#DEBUG END]]
@@ -35,10 +35,6 @@ local VIEW_LIST_CACHE = {}
 local DEFAULT_CONTENT_COLOR = {255, 255, 0}
 local MY_TARGET_MON_MAP_TYPE = MY_TargetMonConfig.MY_TARGET_MON_MAP_TYPE
 local MY_TARGET_MON_DATA_MAX_LIMIT = 2000
-local MATCH_DISABLED_MAP = {
-	[807] = true, -- 鹅鸭大乐园
-} -- 禁止娱乐竞赛类地图监控
-
 do
 local function FilterDatasets(aDataset, dwMapID, dwKungfuID)
 	local ret = {}
@@ -130,7 +126,7 @@ function D.GetDatasetList()
 		end
         local dwMapID = me.GetMapID() or 0
 		-- 竞赛地图禁用监控功能
-        if MATCH_DISABLED_MAP[dwMapID] then
+        if IsVKGDGameMap(dwMapID) then
 			CONFIG_CACHE = {}
             return CONFIG_CACHE
         end
