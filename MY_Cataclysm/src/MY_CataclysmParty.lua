@@ -1604,11 +1604,11 @@ local function DispSorter(a, b)
 	return a.nPriority < b.nPriority
 end
 function D.UpdateCharaterBuff(p, handle, tKeep)
-	if X.IsInCompetitionMap() and X.IsClientPlayerMountMobileKungfu() then
+	local me = X.GetClientPlayer()
+	if (me and IsVKGDGameMap(me.GetMapID())) or (X.IsInCompetitionMap() and X.IsClientPlayerMountMobileKungfu()) then
 		return
 	end
 	local dwCharID = p.dwID
-	local me = X.GetClientPlayer()
 	-- 气劲数据归并
 	local tDisp = {}
 	for _, tRule in pairs(CTM_BUFF_RULE) do
