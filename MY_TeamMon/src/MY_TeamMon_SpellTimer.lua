@@ -300,6 +300,7 @@ function ST:ctor(nType, szKey, tParam)
 		oo.ui.nRefresh  = tParam.nRefresh or 1
 		oo.ui.bTalk     = tParam.bTalk
 		oo.ui.nFrame    = tParam.nFrame
+		oo.ui.bHold     = tParam.bHold
 	else -- 没有ui的情况下 创建
 		oo = {}
 		setmetatable(oo, self)
