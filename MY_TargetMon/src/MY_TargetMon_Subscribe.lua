@@ -43,7 +43,7 @@ function D.OpenPanel(szModule)
 				{
 					szOption = _L['Manage my online data'],
 					fnAction = function()
-						X.OpenBrowser('https://j3cx.com/target-monitor/mine')
+						X.OpenBrowser('https://www.jx3box.com/dbm/pkg/mine')
 						X.UI.ClosePopupMenu()
 					end,
 				},

@@ -81,7 +81,7 @@ function D.OpenPanel(szModule)
 				{
 					szOption = _L['Manage my online world mark'],
 					fnAction = function()
-						X.OpenBrowser('https://j3cx.com/world-mark/mine')
+						X.OpenBrowser('https://www.jx3box.com/dbm/pkg/mine')
 						X.UI.ClosePopupMenu()
 					end,
 				},
