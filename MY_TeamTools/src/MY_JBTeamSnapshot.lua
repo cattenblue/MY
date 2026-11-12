@@ -114,7 +114,7 @@ function D.OnPanelActivePartial(ui, nPaddingX, nPaddingY, nW, nH, nLH, nX, nY, n
 		buttonStyle = 'LINK',
 		text = _L['>> View Snapshots <<'],
 		onClick = function()
-			X.OpenBrowser(MY_RSS.PAGE_BASE_URL .. '/jx3box/team/snapshot')
+			X.OpenBrowser('https://www.jx3box.com/team')
 		end,
 	}):AutoWidth():Width() + 5
 

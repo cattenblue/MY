@@ -132,7 +132,7 @@ function D.OnPanelActivePartial(ui, nPaddingX, nPaddingY, nW, nH, nLH, nX, nY, n
 		x = nX, y = nY + 5, w = 20, h = 20,
 		buttonStyle = 'QUESTION',
 		onClick = function()
-			X.UI.OpenBrowser(MY_RSS.PAGE_BASE_URL .. '/jx3box/team/about')
+			X.UI.OpenBrowser('https://www.jx3box.com/team')
 		end,
 	}):Width()
 
