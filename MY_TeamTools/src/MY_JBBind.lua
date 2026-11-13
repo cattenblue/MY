@@ -14,7 +14,7 @@ local PLUGIN_ROOT = X.PACKET_INFO.ROOT .. PLUGIN_NAME
 local MODULE_NAME = 'MY_JBBind'
 local _L = X.LoadLangPack(PLUGIN_ROOT .. '/lang/jx3box/')
 --------------------------------------------------------------------------
-if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.16') then
+if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.21') then
 	return
 end
 --[[#DEBUG BEGIN]]X.ReportModuleLoading(MODULE_PATH, 'START')--[[#DEBUG END]]
@@ -193,7 +193,7 @@ function D.OnPanelActivePartial(ui, nPaddingX, nPaddingY, nW, nH, nLH, nX, nY, n
 		x = nX, y = nY + 2, w = 120,
 		buttonStyle = 'FLAT', text = _L['Login team platform'],
 		onClick = function()
-			X.OpenBrowser(MY_RSS.PAGE_BASE_URL .. '/jx3box/team/platform')
+			X.OpenBrowser('https://www.jx3box.com/team')
 		end,
 	})
 	nX = nX + uiBtnCCLink:Width()

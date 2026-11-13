@@ -15,7 +15,7 @@ local PLUGIN_ROOT = X.PACKET_INFO.ROOT .. PLUGIN_NAME
 local MODULE_NAME = 'MY_TeamMon'
 local _L = X.LoadLangPack(PLUGIN_ROOT .. '/lang/')
 --------------------------------------------------------------------------------
-if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.19') then
+if not X.AssertVersion(MODULE_NAME, _L[MODULE_NAME], '^29.0.21') then
 	return
 end
 --[[#DEBUG BEGIN]]X.ReportModuleLoading(MODULE_PATH, 'START')--[[#DEBUG END]]
@@ -43,7 +43,7 @@ function D.OpenPanel(szModule)
 				{
 					szOption = _L['Manage my online data'],
 					fnAction = function()
-						X.OpenBrowser('https://j3cx.com/team-monitor/mine')
+						X.OpenBrowser('https://www.jx3box.com/dbm/pkg/mine')
 						X.UI.ClosePopupMenu()
 					end,
 				},

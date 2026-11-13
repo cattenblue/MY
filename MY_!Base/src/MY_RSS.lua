@@ -25,7 +25,6 @@ local RSS_FILE = {'temporary/rss.jx3dat', X.PATH_TYPE.GLOBAL}
 local RSS_DATA = X.LoadLUAData(RSS_FILE) or {}
 local RSS_ADAPTER = {}
 local RSS_DATA_CACHE = {}
-local RSS_BASE_URL      = 'https://rss.j3cx.com'
 local RSS_PULL_BASE_URL = 'https://pull-gplugin.jx3box.com'
 local RSS_PUSH_BASE_URL = 'https://push-gplugin.jx3box.com'
 local RSS_PAGE_BASE_URL = 'https://page.j3cx.com'
@@ -55,10 +54,6 @@ end
 
 function D.Sync()
 	local RSS_URL = {
-		RSS_BASE_URL .. '/rss'
-			.. '?l=' .. X.ENVIRONMENT.GAME_LANG
-			.. '&L=' .. X.ENVIRONMENT.GAME_EDITION
-			.. '&_=' .. GetCurrentTime(),
 		RSS_PULL_BASE_URL .. '/config/all'
 			.. '?l=' .. X.ENVIRONMENT.GAME_LANG
 			.. '&L=' .. X.ENVIRONMENT.GAME_EDITION
