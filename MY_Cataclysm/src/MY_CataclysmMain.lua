@@ -53,7 +53,10 @@ local function InsertBuffListCache(aBuffList, szVia, nViaPriority)
 						and (not tab.nStackNum or tab.nStackNum == p.nStackNum)
 						and (not tab.nPriority or tab.nPriority == p.nPriority)
 						and (not tab.bOnlyMe == not p.bOnlyMe)
-						and (not tab.bOnlyMine == not p.bOnlyMine) then
+						and (not tab.bOnlyMine == not p.bOnlyMine) 
+						and (not tab.bCaution == not p.bCaution)
+						and (not tab.bAttention == not p.bAttention)
+						and (not tab.bScreenHead == not p.bScreenHead) then
 							table.remove(aList, i)
 						end
 					end
