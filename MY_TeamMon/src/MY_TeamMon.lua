@@ -1994,15 +1994,18 @@ local MAP_ID, PREV_MAP_ID
 function D.FireCrossMapEvent(szWhen)
 	local dwMapID = X.GetMapID(true)
 	if szWhen == 'before' then
-		if PREV_MAP_ID and PREV_MAP_ID ~= dwMapID then
+		if not PREV_MAP_ID then
+			D.OnCallMessage('TALK', _L('welcome to use MY_TeamMon'), nil, MY_TEAM_MON_CORE_NAME)
+		elseif PREV_MAP_ID ~= dwMapID then
 			local map = PREV_MAP_ID and X.GetMapInfo(PREV_MAP_ID)
 			if map then
 				local szEvent = 'CHAT'
 				local szContent = _L('Leave map %s.', map.szName)
 				D.OnCallMessage(szEvent, szContent)
+				D.OnCallMessage('TALK', _L('Leave map'), nil, map.szName)
 			end
-			PREV_MAP_ID = dwMapID
 		end
+		PREV_MAP_ID = dwMapID or 0
 	elseif szWhen == 'after' then
 		if MAP_ID ~= dwMapID then
 			local map = X.GetMapInfo(dwMapID)
@@ -2010,6 +2013,7 @@ function D.FireCrossMapEvent(szWhen)
 				local szEvent = 'CHAT'
 				local szContent = _L('Enter map %s.', map.szName)
 				D.OnCallMessage(szEvent, szContent)
+				D.OnCallMessage('TALK', _L('Enter map'), nil, map.szName)
 			end
 			MAP_ID = dwMapID
 		end
