@@ -770,6 +770,8 @@ function D.UpdateItems(page)
 					count = count + rec.bankcount + rec.bagcount
 				end
 				X.UI.UpdateItemInfoBoxObject(box, nil, rec.tabtype, rec.tabindex, count, rec.tabsubindex)
+				box.OnItemMouseEnter = nil
+				box.OnItemRefreshTip = nil
 				UpdateItemBoxExtend(box, KItemInfo.nGenre, KItemInfo.nQuality, bMaxStrength)
 				box.itemdata = rec
 				box.belongsdata = result
