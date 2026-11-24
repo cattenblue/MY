@@ -297,23 +297,24 @@ function D.Open(szConfigUUID, szMonitorUUID)
 					end,
 				},
 			}
-			for _, force in ipairs(X.CONSTANT.FORCE_LIST) do
-				for i, dwKungfuID in ipairs(X.GetForceKungfuList(force.dwID) or {}) do
-					table.insert(menu, {
-						szOption = X.GetSkillName(dwKungfuID, 1),
-						rgb = {X.GetForceColor(force.dwID, 'foreground')},
-						bCheck = true,
-						bChecked = not X.IsEmpty(mon.tKungfu) and mon.tKungfu[dwKungfuID],
-						fnAction = function(_, bChecked)
-							if not mon.tKungfu then
-								mon.tKungfu = {}
-							end
-							mon.tKungfu[dwKungfuID] = bChecked
-							FireUIEvent('MY_TARGET_MON_CONFIG__DATASET_MONITOR_MODIFY', dataset.szUUID)
-						end,
-						fnDisable = function() return X.IsEmpty(mon.tKungfu) or mon.tKungfu.bAll end,
-					})
-				end
+			for _, v in ipairs(X.CONSTANT.KUNGFU_LIST) do
+				table.insert(menu, {
+					szOption = X.GetSkillName(v.dwID, 1),
+					rgb = {X.GetForceColor(v.dwForceID, 'foreground')},
+					bCheck   = true,
+					bChecked = not X.IsEmpty(mon.tKungfu) and mon.tKungfu[v.dwID],
+					szIcon   = v.szUITex,
+					nFrame   = v.nFrame,
+					szLayer  = 'ICON_RIGHTMOST',
+					fnAction = function(_, bChecked)
+						if not mon.tKungfu then
+							mon.tKungfu = {}
+						end
+						mon.tKungfu[v.dwID] = bChecked
+						FireUIEvent('MY_TARGET_MON_CONFIG__DATASET_MONITOR_MODIFY', dataset.szUUID)
+					end,
+					fnDisable = function() return X.IsEmpty(mon.tKungfu) or mon.tKungfu.bAll end,
+				})
 			end
 			return menu
 		end,
@@ -353,23 +354,24 @@ function D.Open(szConfigUUID, szMonitorUUID)
 					fnDisable = function() return X.IsEmpty(mon.tTargetKungfu) or mon.tTargetKungfu.bAll end,
 				},
 			}
-			for _, force in ipairs(X.CONSTANT.FORCE_LIST) do
-				for i, dwKungfuID in ipairs(X.GetForceKungfuList(force.dwID) or {}) do
-					table.insert(menu, {
-						szOption = X.GetSkillName(dwKungfuID, 1),
-						rgb = {X.GetForceColor(force.dwID, 'foreground')},
-						bCheck = true,
-						bChecked = not X.IsEmpty(mon.tTargetKungfu) and mon.tTargetKungfu[dwKungfuID],
-						fnAction = function(_, bChecked)
-							if not mon.tTargetKungfu then
-								mon.tTargetKungfu = {}
-							end
-							mon.tTargetKungfu[dwKungfuID] = bChecked
-							FireUIEvent('MY_TARGET_MON_CONFIG__DATASET_MONITOR_MODIFY', dataset.szUUID)
-						end,
-						fnDisable = function() return X.IsEmpty(mon.tTargetKungfu) or mon.tTargetKungfu.bAll end,
-					})
-				end
+			for _, v in ipairs(X.CONSTANT.KUNGFU_LIST) do
+				table.insert(menu, {
+					szOption = X.GetSkillName(v.dwID, 1),
+					rgb = {X.GetForceColor(v.dwForceID, 'foreground')},
+					bCheck   = true,
+					bChecked = not X.IsEmpty(mon.tTargetKungfu) and mon.tTargetKungfu[v.dwID],
+					szIcon   = v.szUITex,
+					nFrame   = v.nFrame,
+					szLayer  = 'ICON_RIGHTMOST',
+					fnAction = function(_, bChecked)
+						if not mon.tTargetKungfu then
+							mon.tTargetKungfu = {}
+						end
+						mon.tTargetKungfu[v.dwID] = bChecked
+						FireUIEvent('MY_TARGET_MON_CONFIG__DATASET_MONITOR_MODIFY', dataset.szUUID)
+					end,
+					fnDisable = function() return X.IsEmpty(mon.tTargetKungfu) or mon.tTargetKungfu.bAll end,
+				})
 			end
 			return menu
 		end,
