@@ -90,6 +90,7 @@ return {
 	['Show Group Number'] = '显示分组编号',
 	['Team Members: %d, %d agree %d%%'] = '团队共%d人，%d人已同意发放工资，当前比率%d%%。',
 	['Wage await %ds...'] = '工资等待确认中…(%ds)',
+	['Wage awaiting confirmation...'] = '工资等待确认中…',
 	['Cataclysm Team Panel'] = '团队面板',
 	-- MY_CataclysmParty.lua --
 	['Please unlock talk lock first.'] = '请先解除聊天锁。',

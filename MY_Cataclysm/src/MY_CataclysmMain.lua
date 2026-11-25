@@ -651,7 +651,13 @@ function D.OnWageStart()
 	MY_CataclysmParty:StartTeamVote('wage_agree')
 	local nTime = GetCurrentTime()
 	local function fnAction()
-		D.SetFrameCaption(_L('Wage await %ds...', 30 - (GetCurrentTime() - nTime)))
+		local nRemain = 30 - (GetCurrentTime() - nTime)
+		if nRemain <= 0 then
+			D.SetFrameCaption(_L['Wage awaiting confirmation...'])
+			X.BreatheCall('MY_Cataclysm_Wage', false)
+			return
+		end
+		D.SetFrameCaption(_L('Wage await %ds...', nRemain))
 	end
 	fnAction()
 	X.BreatheCall('MY_Cataclysm_Wage', 1000, fnAction)
