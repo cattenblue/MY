@@ -210,6 +210,16 @@ local FILTER_LIST = {
 	{ name = 'TimeLtd'  , where = 'I.exist_type <> -1 AND I.exist_type <> ' .. ITEM_EXIST_TYPE.PERMANENT },
 }
 
+local function GetFullItemTip(fnGetTip, ...)
+	local result = {X.Call(fnGetTip, ...)}
+	if not result[1] then
+		return '', ''
+	end
+
+	local szTitle = result[10]
+	return szTitle .. (result[2] or ''), szTitle
+end
+
 do
 local GetItemText
 do
@@ -220,7 +230,7 @@ function GetItemText(KItem)
 			local nBookID = KItem.nGenre == ITEM_GENRE.BOOK and KItem.nBookID or -1
 			local szKey = KItem.dwTabType .. ',' .. KItem.dwIndex .. ',' .. nBookID
 			if not l_tItemText[szKey] then
-				l_tItemText[szKey] = X.GetPureText(X.GetItemTip(KItem), 'LUA') or ''
+				l_tItemText[szKey] = X.GetPureText(GetFullItemTip(GetItemTip, KItem), 'LUA') or ''
 			end
 			return l_tItemText[szKey]
 		else
@@ -447,7 +457,7 @@ function D.ItemToData(KItem, szBagType)
 		diamond_enchant = AnsiToUTF8(X.EncodeJSON(aDiamondEnchant)) -- 五行石
 		fea_enchant = KItem.nSub == EQUIPMENT_SUB.MELEE_WEAPON and KItem.GetMountFEAEnchantID() or 0 -- 五彩石
 		permanent_enchant = KItem.dwPermanentEnchantID -- 附魔
-		desc = AnsiToUTF8(X.GetItemTip(KItem) or '')
+		desc = AnsiToUTF8((GetFullItemTip(GetItemTip, KItem)))
 	end
 	local aItemData = {
 		tabtype, tabindex, tabsubindex, bagcount, bankcount,
@@ -1014,9 +1024,20 @@ function D.OnItemMouseEnter()
 		local aXml = {}
 
 		if X.IsEmpty(rec.itemtip) then
-			table.insert(aXml, GetItemInfoTip(nil, rec.tabtype, rec.tabindex, nil, nil, rec.tabsubindex) or '')
+			table.insert(aXml, (GetFullItemTip(GetItemInfoTip, nil, rec.tabtype, rec.tabindex, nil, nil, rec.tabsubindex)))
 		else
-			table.insert(aXml, UTF8ToAnsi(rec.itemtip) or '')
+			local szItemTip = UTF8ToAnsi(rec.itemtip) or ''
+			local KItemInfo = GetItemInfo(rec.tabtype, rec.tabindex)
+			if KItemInfo then
+				local nBookInfo = rec.tabsubindex ~= -1 and rec.tabsubindex or nil
+				local szName = X.GetItemNameByItemInfo(KItemInfo, nBookInfo)
+				local szText = X.GetPureText(szItemTip, 'LUA') or ''
+				if not X.IsEmpty(szName) and not szText:find(szName, 1, true) then
+					local _, szTitle = GetFullItemTip(GetItemInfoTip, nil, rec.tabtype, rec.tabindex, nil, nil, rec.tabsubindex)
+					table.insert(aXml, szTitle)
+				end
+			end
+			table.insert(aXml, szItemTip)
 		end
 
 		if IsCtrlKeyDown() then
