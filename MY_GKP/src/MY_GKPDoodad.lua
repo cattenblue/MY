@@ -540,6 +540,11 @@ X.RegisterInit('MY_GKPDoodad', function()
 	end
 end)
 
+local function IsHeadNameVisible(doodad, me)
+	return doodad ~= nil and me ~= nil and doodad.IsSelectable()
+		and (doodad.nKind ~= DOODAD_KIND.QUEST or doodad.HaveQuest(me.dwID))
+end
+
 -- switch name
 function D.CheckShowName()
 	local hName = X.UI.GetShadowHandle('MY_GKPDoodad')
@@ -547,6 +552,14 @@ function D.CheckShowName()
 	if bShowName and not D.pLabel then
 		D.pLabel = hName:AppendItemFromIni(INI_SHADOW, 'Shadow', 'Shadow_Name')
 		X.BreatheCall('MY_GKPDoodad__HeadName', function()
+			local me = X.GetClientPlayer()
+			for dwID, info in pairs(D.tDoodad) do
+				local bVisible = IsHeadNameVisible(X.GetDoodad(dwID), me)
+				if info.bHeadNameVisible ~= bVisible then
+					info.bHeadNameVisible = bVisible
+					D.bUpdateLabel = true
+				end
+			end
 			if D.bUpdateLabel then
 				D.bUpdateLabel = false
 				D.UpdateHeadName()
@@ -569,13 +582,14 @@ function D.UpdateHeadName()
 	if not sha then
 		return
 	end
+	local me = X.GetClientPlayer()
 	local r, g, b = unpack(O.tNameColor)
 	sha:SetTriangleFan(GEOMETRY_TYPE.TEXT)
 	sha:ClearTriangleFanPoint()
 	for dwID, info in pairs(D.tDoodad) do
 		local tar = X.GetDoodad(dwID)
 		local bShow = info.eRuleType ~= 'loot' or info.bCustom or info.bRecent
-		if bShow or D.bDebug then
+		if (bShow or D.bDebug) and IsHeadNameVisible(tar, me) then
 			local szName = X.GetDoodadName(dwID, { eShowID = 'never' }) or ''
 			local fYDelta = 128
 			local nR, nG, nB, nA, bDarken = r, g, b, 255, false

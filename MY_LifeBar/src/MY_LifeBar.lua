@@ -605,7 +605,7 @@ function CheckInvalidRect(dwType, dwID, me, object)
 		-- Ãû×Ö
 		bShowName = GetConfigComputeValue('ShowName', relation, force, bFight, bPet, bCurrentTarget, bFullLife)
 		if bShowName and dwType == TARGET.NPC and not object.CanSeeName() then
-			bShowName = IsSpecialNpcVisible(dwID, me, object)
+			bShowName = false
 		end
 		if bShowName then
 			lb:SetName(szName)
