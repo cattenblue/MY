@@ -216,7 +216,7 @@ local function GetFullItemTip(fnGetTip, ...)
 		return '', ''
 	end
 
-	local szTitle = result[10]
+	local szTitle = result[10] or ''
 	return szTitle .. (result[2] or ''), szTitle
 end
 
