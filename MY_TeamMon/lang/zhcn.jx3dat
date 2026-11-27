@@ -1,5 +1,8 @@
 return {
 	['MY_TeamMon'] = '团队监控',
+	['welcome to use MY_TeamMon'] = '欢迎使用团队监控插件！',
+	['Leave map'] = '你已离开地图',
+	['Enter map'] = '你已进入地图',
 	['Leave map %s.'] = '你已离开地图【%s】。',
 	['Enter map %s.'] = '你已进入地图【%s】。',
 	['Encrypt and compressing: '] = '更新加密压缩：',
